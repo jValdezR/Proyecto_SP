@@ -2,15 +2,15 @@
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 
-int d1t1 12
-int d1t2 13
-int d1t3 14
-int d1t4 15
+int d1t1 = 12;
+int d1t2 = 13;
+int d1t3 = 14;
+int d1t4 = 15;
 
-int d2t1 12
-int d2t2 12
-int d2t3 12
-int d2t4 12
+int d2t1 = 12;
+int d2t2 = 12;
+int d2t3 = 12;
+int d2t4 = 12;
 const char *ssid = "SistemasProgramables";
 const char *password = "MarcosWapo";
 
@@ -36,17 +36,14 @@ void loop() {
   WiFiClient client = server.available();
 
   if (client) {
-    Serial.println("New Client.");
     String currentLine = "";
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
-        Serial.write(c);
         if (c == '\n') {
 
 
           if (currentLine.length() == 0) {
-            client.println();
             break;
           } else {
             currentLine = "";
@@ -67,37 +64,38 @@ void loop() {
         30 minutos = t3
         60 minutos = t4
         */
-
         //Ejemplos de peticiones: para cerrar la puerta izquierda durante 15 minutos el get será a: /d1t2
-        if (currentLine.endsWith("GET /d1t1")) {
-          digitalWrite(LED_BUILTIN, HIGH);
-        }
-        if (currentLine.endsWith("GET /d1t2")) {
-          digitalWrite(LED_BUILTIN, HIGH);
-        }
-        if (currentLine.endsWith("GET /d1t3")) {
-          digitalWrite(LED_BUILTIN, HIGH);
-        }
-        if (currentLine.endsWith("GET /d1t4")) {
-          digitalWrite(LED_BUILTIN, HIGH);
-        }
+        if (currentLine.endsWith("GET /")) {
+          Serial.println(currentLine);
 
-        if (currentLine.endsWith("GET /d2t1")) {
-          digitalWrite(LED_BUILTIN, HIGH);
         }
-        if (currentLine.endsWith("GET /d2t2")) {
-          digitalWrite(LED_BUILTIN, HIGH);
+        if (currentLine.endsWith("POST")) {
+          Serial.println(currentLine);
+
         }
-        if (currentLine.endsWith("GET /d2t3")) {
-          digitalWrite(LED_BUILTIN, HIGH);
-        }
-        if (currentLine.endsWith("GET /d2t4")) {
-          digitalWrite(LED_BUILTIN, LOW);
-        }
+//        if (currentLine.endsWith("GET /d1t3")) {
+//          Serial.println("d1t3");
+//
+//        }
+//        if (currentLine.endsWith("GET /d1t4")) {
+//          Serial.println("d1t4");
+//        }
+//
+//        if (currentLine.endsWith("GET /d2t1")) {
+//          Serial.println("d2t1");
+//        }
+//        if (currentLine.endsWith("GET /d2t2")) {
+//          Serial.println("d2t2");
+//        }
+//        if (currentLine.endsWith("GET /d2t3")) {
+//          Serial.println("d2t3");
+//        }
+//        if (currentLine.endsWith("GET /d2t4")) {
+//          Serial.println("d2t4");
+//        }
       }
     }
     // close the connection:
     client.stop();
-    Serial.println("Client Disconnected.");
   }
 }
