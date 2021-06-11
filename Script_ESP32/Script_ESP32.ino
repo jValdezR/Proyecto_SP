@@ -65,11 +65,11 @@ void loop() {
         60 minutos = t4
         */
         //Ejemplos de peticiones: para cerrar la puerta izquierda durante 15 minutos el get será a: /d1t2
-        if (currentLine.endsWith("GET /")) {
+        if (currentLine.endsWith("GET /")) { //De esta manera solo imprime GET /, no imprime lo que sigue despues de ahí
           Serial.println(currentLine);
 
         }
-        if (currentLine.endsWith("POST")) {
+        if (currentLine.endsWith("POST")) { //Mismo caso
           Serial.println(currentLine);
 
         }
