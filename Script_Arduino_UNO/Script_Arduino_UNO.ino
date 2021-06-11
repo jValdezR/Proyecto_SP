@@ -10,19 +10,18 @@ int highSensor = 4;
 int lowSensor = 5;
 void setup() 
 {
-  Serial.begin(115200);
-  Serial1.begin(9600);
+  Serial.begin(9600);
   pinMode(motorpin1, OUTPUT);
   pinMode(motorpin2, OUTPUT);
 
   pinMode(highSensor, INPUT);
   pinMode(lowSensor, INPUT);
   
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Hola :D ");
-  lcd.setCursor(0, 1);
-  lcd.print("Team Amarrilo - SP");
+//  lcd.clear();
+//  lcd.setCursor(0,0);
+//  lcd.print("Hola :D ");
+//  lcd.setCursor(0, 1);
+//  lcd.print("Team Amarrilo - SP");
 
 
 }
@@ -33,11 +32,9 @@ void loop()
 if(Serial.available() > 0){
  String data = Serial.readStringUntil('\n');
  DEBUG(data);
- Serial1.println("Datos desde MEGA");
- Serial1.println(data);
 }
 delay(100);
-} 
+}
 
 void clearDisplay(){
   lcd.clear();
