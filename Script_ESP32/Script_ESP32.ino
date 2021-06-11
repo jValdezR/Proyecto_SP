@@ -2,34 +2,19 @@
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 
-int d1t1 = 12;
-int d1t2 = 13;
-int d1t3 = 14;
-int d1t4 = 15;
-
-int d2t1 = 12;
-int d2t2 = 12;
-int d2t3 = 12;
-int d2t4 = 12;
 const char *ssid = "SistemasProgramables";
 const char *password = "MarcosWapo";
 
 WiFiServer server(80);
 
-
 void setup() {
 
-
   Serial.begin(115200);
-  Serial.println();
-  Serial.println("Configurando punto de acceso...");
+
 
   WiFi.softAP(ssid, password);
   IPAddress myIP = WiFi.softAPIP();
-  Serial.print("IP: ");
-  Serial.println(myIP);
   server.begin();
-  Serial.println("Servidor arriba");
 }
 
 void loop() {
@@ -41,8 +26,6 @@ void loop() {
       if (client.available()) {
         char c = client.read();
         if (c == '\n') {
-
-
           if (currentLine.length() == 0) {
             break;
           } else {
@@ -52,47 +35,36 @@ void loop() {
           currentLine += c;
         }
 
-        //Puerta
-        /*
-        Puerta izquierda = d1
-        Puerta derecha = d2
-        */
-        //Rutinas:
-        /*
-         5 minutos = t1
-        15 minutos = t2
-        30 minutos = t3
-        60 minutos = t4
-        */
-        //Ejemplos de peticiones: para cerrar la puerta izquierda durante 15 minutos el get será a: /d1t2
-        if (currentLine.endsWith("GET /")) { //De esta manera solo imprime GET /, no imprime lo que sigue despues de ahí
-          Serial.println(currentLine);
-
+        if (currentLine.endsWith("GET /d1t1")) { //De esta manera solo imprime GET /, no imprime lo que sigue despues de ahí
+          Serial.println("d1t1");
         }
-        if (currentLine.endsWith("POST")) { //Mismo caso
-          Serial.println(currentLine);
-
+        if (currentLine.endsWith("GET /d1t2")) { //Mismo caso
+          Serial.println("d1t2");
         }
-//        if (currentLine.endsWith("GET /d1t3")) {
-//          Serial.println("d1t3");
-//
-//        }
-//        if (currentLine.endsWith("GET /d1t4")) {
-//          Serial.println("d1t4");
-//        }
-//
-//        if (currentLine.endsWith("GET /d2t1")) {
-//          Serial.println("d2t1");
-//        }
-//        if (currentLine.endsWith("GET /d2t2")) {
-//          Serial.println("d2t2");
-//        }
-//        if (currentLine.endsWith("GET /d2t3")) {
-//          Serial.println("d2t3");
-//        }
-//        if (currentLine.endsWith("GET /d2t4")) {
-//          Serial.println("d2t4");
-//        }
+       if (currentLine.endsWith("GET /d1t3")) {
+         Serial.println("d1t3");
+       }
+       if (currentLine.endsWith("GET /d1t4")) {
+         Serial.println("d1t4");
+       }
+       if (currentLine.endsWith("GET /d2t1")) {
+         Serial.println("d2t1");
+       }
+       if (currentLine.endsWith("GET /d2t2")) {
+         Serial.println("d2t2");
+       }
+       if (currentLine.endsWith("GET /d2t3")) {
+         Serial.println("d2t3");
+       }
+       if (currentLine.endsWith("GET /d2t4")) {
+         Serial.println("d2t4");
+       }
+      if (currentLine.endsWith("GET /od1")) {
+         Serial.println("od1");
+       }
+      if (currentLine.endsWith("GET /od2")) {
+         Serial.println("od2");
+       }
       }
     }
     // close the connection:
